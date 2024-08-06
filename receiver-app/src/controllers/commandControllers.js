@@ -1,14 +1,13 @@
 import axios from "axios";
+
 import { storData } from "../services/validate.js";
+import { fetchSetting, saveSetting } from "../models/settingModel.js";
 
 const SENDER_APP_URL = "http://localhost:3000";
 
 class CommandControllers {
   static async saveToMongo(req, res) {
-    // Fetch items
-    const items = req.body.items
-
-    // Fetch data
+    // Request Object for Fetch data
     const request = {
       method: "GET",
       baseURL: SENDER_APP_URL,
@@ -19,6 +18,8 @@ class CommandControllers {
       const response = await axios(request);
       const data = JSON.parse(response.data.body);
 
+      const setting = await fetchSetting('cb647a71-076c-4418-8185-4f594861ebe3')
+      const items = setting.items;
       try {
         await storData(data, items);
         res.status(201).json({
@@ -36,7 +37,6 @@ class CommandControllers {
       CommandControllers.handleRequestError(error, res);
     }
   }
-
 
   static handleRequestError(error, res) {
     if (error.response) {

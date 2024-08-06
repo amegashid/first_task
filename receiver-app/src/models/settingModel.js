@@ -40,15 +40,16 @@ async function saveSetting(data) {
     }
 }
 
-async function fetchSetting(query) {
+async function fetchSetting(_id) {
     try {
+        const query = { _id }
         const data = await Setting.findOne(query);
         if (!data) {
             throw new Error('Setting not found');
         }
         return data;
     } catch (error) {
-        throw new Error(`Error fetching setting: ${error.message}`);
+        throw new Error(`Error fetching setting: ${ error.message }`);
     }
 }
 
@@ -57,7 +58,7 @@ async function fetchAllSetting() {
         const allData = await Setting.find({});
         return allData;
     } catch (error) {
-        throw new Error(`Error fetching all settings: ${error.message}`);
+        throw new Error(`Error fetching all settings: ${ error.message }`);
     }
 }
 
