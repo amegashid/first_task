@@ -1,4 +1,4 @@
-import Data from "../models/connectionModels.js";
+import Data from "../models/dataModel.js";
 
 export async function storData(data, items) {
   const dataEntries = Object.entries(data);

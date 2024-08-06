@@ -13,15 +13,15 @@ const dataSchema = new mongoose.Schema({
 
    created_at: {
     type: Date,
-    default: Data.now
+    default: Date.now
    },
 
    updated_at: {
     type: Date,
-    default: Data.now
+    default: Date.now
    }
 });
 
-const Data = mongoose.model("Data", dataSchema);
+const data = mongoose.model("Data", dataSchema);
 
-export default Data;
+export default data;
