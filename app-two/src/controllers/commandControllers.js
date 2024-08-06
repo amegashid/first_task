@@ -13,7 +13,6 @@ class CommandControllers {
       baseURL: SENDER_APP_URL,
       url: "/test",
     };
-
     try {
       const response = await axios(request);
       const data = JSON.parse(response.data.body);
@@ -37,6 +36,11 @@ class CommandControllers {
       CommandControllers.handleRequestError(error, res);
     }
   }
+
+  static sendToAppOne(req, res) {
+
+  }
+
 
   static handleRequestError(error, res) {
     if (error.response) {

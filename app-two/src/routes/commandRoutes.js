@@ -4,6 +4,7 @@ import CommandControllers from "../controllers/commandControllers.js";
 
 const router = Router();
 
-router.get('/save', CommandControllers.saveToMongo);
+router.get('/test', CommandControllers.saveToMongo);
+router.post('/test', CommandControllers.sendData)
 
 export default router;

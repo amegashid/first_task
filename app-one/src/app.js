@@ -6,6 +6,7 @@ import TestRouter from './routes/testRoutes.js'
 const app = express();
 
 app.use(cors());
+app.use(express.json())
 
 app.use('/', TestRouter);
 

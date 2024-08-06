@@ -2,6 +2,7 @@ import Data from "../models/dataModel.js";
 
 export async function storData(data, items) {
   const dataEntries = Object.entries(data);
+  const dataThatStored = {};
 
   try {
     for (let item of items) {
@@ -10,13 +11,17 @@ export async function storData(data, items) {
 
       if (type === 'array') {
         for (let [dataKey, dataValue] of dataEntries) {
-          if (dataKey === key && Array.isArray(dataValue) && index < dataValue.length) {
-            const dataToStore = createDataToStore(dataKey, dataValue[index]);
-            try {
-              const newData = new Data(dataToStore);
-              await newData.save();
-            } catch (error) {
-              console.warn(`Failed to save data at index ${index}: ${error.message}`);
+          if (dataKey === key && Array.isArray(dataValue)) {
+            if (index < dataValue.length) {
+              const dataToStore = createDataToStore(dataKey, dataValue[index]);
+              try {
+                const newData = new Data(dataToStore);
+                await newData.save();
+              } catch (error) {
+                console.warn(`Failed to save data at index ${index}: ${error.message}`);
+              }
+            } else {
+              console.log(`Index ${index} is out of range ---> ${dataKey} : ${dataValue}`);
             }
           }
         }
