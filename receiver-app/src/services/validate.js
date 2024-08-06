@@ -1,4 +1,4 @@
-import Data from "../models/connectionModels.js";
+import Data from "../models/dataModel.js";
 
 export async function storData(data, items) {
   const dataEntries = Object.entries(data);
@@ -23,7 +23,7 @@ export async function storData(data, items) {
       } else if (type === 'property') {
         for (let [dataKey, dataValue] of dataEntries) {
           if (dataKey === key) {
-            const dataToStore = createDataToStore(item, dataValue.value);
+            const dataToStore = createDataToStore(dataKey, dataValue);
             try {
               const newData = new Data(dataToStore);
               await newData.save();
@@ -42,14 +42,9 @@ export async function storData(data, items) {
   }
 }
 
-function createDataToStore(item, value) {
+function createDataToStore(name, value) {
   return {
-      type: item.data.type,
-      _id: item.data._id,
-      name: item.data.name,
-      dataType: item.data.dataType,
-      value: value
-    created_at: new Date(),
-    updated_at: new Date(),
+      name,
+      value
   };
 }
